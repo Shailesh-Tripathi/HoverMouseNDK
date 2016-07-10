@@ -35,19 +35,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="8" >
 
         <Button
             android:id="@+id/btLeftClick"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="LEFT CLICK" />
 
+        <Button 
+            android:id="@+id/btScroll"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="2"
+            />
         <Button
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:onClick="onRightClick"
             android:text="RIGHT CLICK" />
     </LinearLayout>
