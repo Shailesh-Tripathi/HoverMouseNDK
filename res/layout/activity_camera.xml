@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:screenOrientation="landscape" >
+
+        <org.opencv.android.JavaCameraView
+            android:id="@+id/java_surface_view0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:gravity="center_vertical"
+            android:visibility="gone" />
+
+        <org.opencv.android.JavaCameraView
+            android:id="@+id/java_surface_view1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            opencv:camera_id="1" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/btLeftClick"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:text="LEFT CLICK" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:onClick="onRightClick"
+            android:text="RIGHT CLICK" />
+    </LinearLayout>
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Swap Camera"
+            android:onClick="onCameraSwap"
+            />
+    </LinearLayout>
+    
+</FrameLayout>
