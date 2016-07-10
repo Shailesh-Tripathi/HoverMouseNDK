@@ -6,6 +6,7 @@ import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -127,6 +128,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
 
         OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, mLoaderCallback);
         Button btLeftClick = (Button) findViewById(R.id.btLeftClick);
+        //left click 
         btLeftClick.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -135,7 +137,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
                         //isButtonPressed=true;
                         if (out != null && isConnected) {
                             //while(isButtonPressed){
-                            out.println("left_down");
+                            out.println(Constants.LEFT_DOWN_ACTION);
                             //}
                         }
 
@@ -143,7 +145,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
                     case MotionEvent.ACTION_UP:
                         //isButtonPressed =false;
                         if (out != null && isConnected)
-                            out.println("left_up");
+                            out.println(Constants.LEFT_UP_ACTION);
                         break;
                 }
                 return false;
@@ -399,6 +401,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
         }
     }
 
+    //UI back button used for connection to server
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -406,12 +409,14 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
         connectPhoneTask.execute(Constants.SERVER_IP);
     }
 
+    //right click button
     public void onRightClick(View v) {
         //TODO right click options
         if (out != null && isConnected)
             out.println("right");
     }
 
+    //camera swap button
     public void onCameraSwap(View v){
     	if (iNumberOfCameras > 1) {
             if (iCamera == 0) {
@@ -431,4 +436,35 @@ public class CameraActivity extends Activity implements CvCameraViewListener {
             Toast.makeText(getApplicationContext(), "Sadly, your device does not have a second camera",
                     Toast.LENGTH_LONG).show();
     }
+    
+    //for controlling the volume buttons
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int action = event.getAction();
+        int keyCode = event.getKeyCode();
+            switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    //TODO page up action
+                	if (out != null && isConnected) {
+                        //while(isButtonPressed){
+                        out.println(Constants.PAGE_UP_ACTION);
+                        //}
+                    }
+                }
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    //TODO page down action
+                	if (out != null && isConnected) {
+                        //while(isButtonPressed){
+                        out.println(Constants.PAGE_DOWN_ACTION);
+                        //}
+                    }
+                }
+                return true;
+            default:
+                return super.dispatchKeyEvent(event);
+            }
+        }
 }

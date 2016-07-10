@@ -15,7 +15,8 @@ public class Constants {
 	
 	public static final String RIGHT_CLICK_ACTION="0X";
 	
-	
+	public static final String PAGE_UP_ACTION="PU";
+	public static final String PAGE_DOWN_ACTION="PD";
 	
 	
 }
